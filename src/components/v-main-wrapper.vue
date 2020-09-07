@@ -1,13 +1,17 @@
 <template>
     <div class="v-main-wrapper">
-        <vCart/>
         <vCatalogItem/>
+        <vCart
+            v-if="CART.length"
+            :cart_data="CART"
+        />
     </div>
 </template>
 
 <script>
 import vCatalogItem from './catalog/v-catalog'
 import vCart from './cart/v-cart'
+import {mapGetters} from 'vuex'
 export default {
     name:'v-main-wrapper',
     components: {
@@ -19,6 +23,11 @@ export default {
     },
     data() {
         return {}
+    },
+    computed: {
+        ...mapGetters([
+            'CART'
+        ])
     }
 }
 

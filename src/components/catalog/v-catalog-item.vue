@@ -9,7 +9,7 @@
     <p class="v-catalog-item__price">Price: {{ product_data.price }} UAH</p>
     <button 
         class="v-catalog-item__add-to-cart-btn btn"
-        @click="sendDataToParent"
+        @click="addToCart"
     >
         Add to cart
     </button>
@@ -27,9 +27,9 @@ export default {
     },
   },
   methods: {
-      sendDataToParent() {
-          this.$emit('sendArticleToParent', this.product_data.article)
-      }
+     addToCart() {
+       this.$emit('addToCart', this.product_data)
+     }
   }
 };
 </script>
