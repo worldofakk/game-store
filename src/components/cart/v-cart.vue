@@ -4,17 +4,19 @@
       <div class="v-cart__link-to-cart">Back to Catalog</div>
     </router-link>
     <h1>Cart</h1>
-    <p 
-        class="v-cart__text" v-if="!cart_data.length"
-    >
-        There are no products in cart...
-    </p>
+    <p class="v-cart__text" v-if="!cart_data.length">There are no products in cart...</p>
     <vCartItem
       v-for="(item, index) in cart_data"
       :key="item.article"
       :cart_item_data="item"
       @deleteFromCart="deleteFromCart(index)"
+      @increment="increment(index)"
+      @decrement="decrement(index)"
     />
+    <div class="v-cart__total">
+      <h4>Total:</h4>
+      <p>{{cartTotal}} UAH</p>
+    </div>
   </div>
 </template>
 
@@ -26,7 +28,14 @@ export default {
   components: {
     vCartItem,
   },
-  computed: {},
+  computed: {
+    cartTotal() {
+      return this.cart_data.reduce(
+        (res, item) => res + item.price * item.quantity,
+        0
+      )
+    },
+  },
   props: {
     cart_data: {
       type: Array,
@@ -34,10 +43,20 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["DELETE_FROM_CART"]),
+    ...mapActions([
+        "DELETE_FROM_CART",
+        'INCREMENT_CART_ITEM',
+        'DECREMENT_CART_ITEM'
+    ]),
     deleteFromCart(index) {
-      this.DELETE_FROM_CART(index)
+        this.DELETE_FROM_CART(index)
     },
+    increment(index) {
+        this.INCREMENT_CART_ITEM(index)  
+    },
+    decrement(index) {
+        this.DECREMENT_CART_ITEM(index)
+    }
   },
 }
 </script>
@@ -54,8 +73,24 @@ export default {
     padding: 15px;
   }
   &__text {
-      margin-top: 100px;
-      font-size: 1.5rem;
+    margin-top: 100px;
+    font-size: 1.5rem;
+  }
+  &__total {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    background: #e3e3e3;
+    max-width: 900px;
+    margin: 0 auto;
+
+    h4 {
+      margin-right: 10px;
+    }
   }
 }
 </style>

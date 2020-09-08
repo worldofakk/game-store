@@ -9,7 +9,8 @@
     <p class="v-catalog-item__price">Price: {{ product_data.price }} UAH</p>
     <button 
         class="v-catalog-item__add-to-cart-btn btn"
-        @click="addToCart"
+        :class="{active}"
+        @click="addToCart(); active=!active"
     >
         Add to cart
     </button>
@@ -29,8 +30,16 @@ export default {
   methods: {
      addToCart() {
        this.$emit('addToCart', this.product_data)
-     }
-  }
+     },
+  },
+  data() {
+    return {
+      active: false,
+    }
+  },
+  mounted() {
+        
+    }
 };
 </script>
 
@@ -45,4 +54,8 @@ export default {
       height: 250px;
   }
 }
+  .active {
+    display: none;
+  }
+  
 </style>

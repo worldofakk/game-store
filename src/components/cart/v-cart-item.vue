@@ -10,7 +10,22 @@
             <p>Article: {{cart_item_data.article}}</p>
         </div>
         <div class="v-cart-item__quantity">
-            <p>{{cart_item_data.quantity}} Qty</p>
+            <p> Qty</p>
+            <span class="v-cart-item__quantity__base">
+                <span 
+                    @click="decrementItem" 
+                    class="v-cart-item__quantity__base__decrement"
+                >
+                    
+                </span>
+                    {{cart_item_data.quantity}}
+                <span 
+                    @click="incrementItem"
+                    class="v-cart-item__quantity__base__increment"
+                >
+                    
+                </span>
+            </span>
         </div>
         <button 
             @click="deleteFromCart"
@@ -21,7 +36,6 @@
 </template>
 
 <script>
-
 export default {
     name:'v-cart-item',
     components: {
@@ -32,9 +46,15 @@ export default {
             default: () => {}
         }
     },
-    methods: {
+    methods: {      
         deleteFromCart() {
             this.$emit('deleteFromCart')
+        },
+        decrementItem() {
+           this.$emit('decrement')
+        },
+        incrementItem() {
+            this.$emit('increment')
         }
     },
     mounted() {
@@ -62,6 +82,36 @@ export default {
         img {
             width: 100px;
             height: 140px;
+        }
+        &__quantity {
+            &__base {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &__decrement {
+                    cursor: pointer;
+                    position: relative;
+                    &:before {
+                        content: '-';
+                        position: absolute;
+                        left: -15px;
+                        top: -15px;
+                        font-size: 25px;
+                    }
+                }
+                &__increment {
+                    cursor: pointer;
+                     position: relative;
+                    &:before {
+                        content: '+';
+                        position: absolute;
+                        right: -17px;
+                        top: -11px;
+                        font-size: 21px;
+                    }
+                    
+                }
+            }
         }
     }
 </style>

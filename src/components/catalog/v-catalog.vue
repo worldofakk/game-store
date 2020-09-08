@@ -33,6 +33,9 @@ export default {
       ]),
       addToCart(data) {
         this.ADD_TO_CART(data)
+      },
+      disabledCartButton() {
+        console.log('kek')
       }
   },
   mounted() {
