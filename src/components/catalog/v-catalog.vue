@@ -52,7 +52,7 @@ export default {
             self.sortedProducts.push(item);
           }
         })
-        this.selected = category
+        this.selected = category.name
       }
   },
   mounted() {
