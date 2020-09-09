@@ -7,9 +7,14 @@
     </router-link>
     
     <h1>Catalog</h1>
+    <vSelect
+      :selected="selected"
+      :options="categories"
+      @select="sortByCategories"
+    />
     <div class="v-catalog__list">
       <vCatalogItem
-        v-for="product in PRODUCTS"
+        v-for="product in filteredProducts"
         :key="product.article"
         :product_data="product"
         @addToCart="addToCart"
@@ -21,10 +26,12 @@
 <script>
 import vCatalogItem from "./v-catalog-item";
 import {mapActions, mapGetters} from 'vuex'
+import vSelect from '../v-select';
 export default {
   name: "v-catalog",
   components: {
     vCatalogItem,
+    vSelect
   },
   methods: {
       ...mapActions([
@@ -36,6 +43,16 @@ export default {
       },
       disabledCartButton() {
         console.log('kek')
+      },
+      sortByCategories(category) {
+        this.sortedProducts = []
+        let self = this
+        this.PRODUCTS.map(function(item) {
+          if (item.category === category.name) {
+            self.sortedProducts.push(item);
+          }
+        })
+        this.selected = category.name
       }
   },
   mounted() {
@@ -43,14 +60,31 @@ export default {
   },
   data() {
     return {
-      
+      categories: [
+        {name: 'All', value: 'All'},
+        {name: 'RPG', value: 'RPG'},
+        {name: 'Action', value: 'Action'},
+        {name: 'Simulater', value: 'Simulater'},
+        {name: 'Online RPG', value: 'Online RPG'}
+      ],
+      selected: 'All',
+      sortedProducts: [
+
+      ]
     };
   },
   computed: {
     ...mapGetters([
         'PRODUCTS',
         'CART'
-      ])
+      ]),
+      filteredProducts() {
+        if (this.sortedProducts.length) {
+          return this.sortedProducts
+        } else {
+          return this.PRODUCTS
+        }
+      }
   }
 };
 </script>
