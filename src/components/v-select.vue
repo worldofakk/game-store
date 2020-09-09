@@ -74,7 +74,8 @@
     padding: 8px;
   }
   .v-select p {
-    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   .options {
@@ -83,7 +84,7 @@
     position: absolute;
     top: 30px;
     left: 0;
-    width: 100%;
+    width: 182px;
     padding: 8px;
   }
 

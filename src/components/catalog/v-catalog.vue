@@ -52,7 +52,7 @@ export default {
             self.sortedProducts.push(item);
           }
         })
-        this.selected = category.name
+        this.selected = category
       }
   },
   mounted() {
@@ -76,7 +76,8 @@ export default {
   computed: {
     ...mapGetters([
         'PRODUCTS',
-        'CART'
+        'CART',
+        'IS_DESKTOP'
       ]),
       filteredProducts() {
         if (this.sortedProducts.length) {

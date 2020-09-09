@@ -11,5 +11,11 @@ export default {
       },
       DECREMENT_CART_ITEM({commit}, index) {
         commit("DECREMENT", index)
+      },
+      SET_MOBILE({commit}) {
+        commit('SWITCH_MOBILE')
+      },
+      SET_DESKTOP({commit}) {
+        commit('SWITCH_DESKTOP')
       }
 }
