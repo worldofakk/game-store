@@ -5,7 +5,7 @@
       Cart: {{CART.length}}
     </div>
     </router-link>
-    <h1>Catalog</h1>
+      <h1>Catalog</h1>
     <div class="filters">
       <vSelect
         :selected="selected"
@@ -127,7 +127,6 @@ export default {
 
 <style lang="scss" scoped>
   .v-catalog {
-    position: relative;
     padding-top: 30px;
     &__list {
       display: flex;
@@ -138,7 +137,6 @@ export default {
     }
     &__link-to-cart {
       position: absolute;
-      top: 30px;
       right: 0;
       box-shadow: 0 0 8px 0 #e3e3e3;
       padding: 15px;

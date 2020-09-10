@@ -63,7 +63,6 @@ export default {
 
 <style lang="scss" scoped>
 .v-cart {
-  position: relative;
   padding-top: 30px;
   &__link-to-cart {
     position: absolute;
